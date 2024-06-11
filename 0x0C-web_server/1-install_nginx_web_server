@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
-# This script will install nginx on remote server and configure it
-# Nginx will listen on port 80
-# querying will be done using GET request through curl
-# curl will return a string that contains Hello World!
+#Install nginx web server
+sudo apt-get update && sudo apt-get install nginx
 
+# Start nginx service
+sudo service nginx start
 
-# update package lists
-apt-get update
+# Create index.html with "Hello World!"
+sudo touch /var/www/html/index.html
 
-# install nginx
-apt-get -y install nginx
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# configure nginx
-ufw allow 'Nginx HTTP'
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-
-# restart nginx
-service nginx start
+# Restart Nginx to apply changes
+sudo service nginx restart
